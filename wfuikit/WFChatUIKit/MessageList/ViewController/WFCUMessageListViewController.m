@@ -99,6 +99,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 告知趣运动跟谁聊天
+    Class class = NSClassFromString(@"GoSportIMHandler");
+    if (class) {
+        SEL sel = NSSelectorFromString(@"willChatToUserId:");
+        if ([class respondsToSelector:sel]) {
+            [class performSelector:sel withObject:self.conversation.target];
+        }
+    }
 
   self.cellContentDict = [[NSMutableDictionary alloc] init];
 
@@ -1047,10 +1056,9 @@
     // 跳到趣运动的个人详情
     Class class = NSClassFromString(@"GoSportIMHandler");
     if (class) {
-        id obj = [[class alloc] init];
         SEL sel = NSSelectorFromString(@"openUserDetailWithUserId:");
-        if ([obj respondsToSelector:sel]) {
-            [obj performSelector:sel withObject:model.message.fromUser];
+        if ([class respondsToSelector:sel]) {
+            [class performSelector:sel withObject:model.message.fromUser];
         }
         return;
     }
