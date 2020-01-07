@@ -353,7 +353,8 @@
             count += info.unreadCount.unread;
         }
     }
-    [self.tabBarController.tabBar showBadgeOnItemIndex:0 badgeValue:count];
+    // 去掉 tabbar 的未读消息数的显示
+    // [self.tabBarController.tabBar showBadgeOnItemIndex:0 badgeValue:count];
 }
 
 - (void)updatePcSession {
